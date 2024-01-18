@@ -98,7 +98,6 @@ def calculateSleepDifference(startT, endT):
 
 #holds hours of sleep per day in list,each day being a new index
 def calculateSleepDuration(startTime, endTime):
-    sleepSchedule = []
     sleepTypeHrs = 0
     sleepTypeHrs += calculateSleepDifference(startTime, endTime)
     return sleepTypeHrs
