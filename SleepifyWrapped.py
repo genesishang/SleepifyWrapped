@@ -44,7 +44,7 @@ def minToHrs(mins):
 #retrieve times from data as string, assuming MONTH/DAY/YR HR:MIN:SEC AM/PM format)
 def timeRetrieve(columnName):
      column = row[columnName]
-     splitColumn = split.splitColumn(' ')
+     splitColumn = column(' ')
      return str(splitColumn[2])
 
 #helper
