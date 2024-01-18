@@ -48,5 +48,3 @@ def avgHR(heartRates):
             total+= value
         avg = total/len(heartRates[key])
         totalAverages[key].append(avg)
-    
-    
