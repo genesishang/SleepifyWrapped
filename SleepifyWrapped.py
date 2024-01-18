@@ -20,19 +20,13 @@ def main(filename):
 #helper
 #convert sec to hrs
 def secToMins(secs):
-     min = secs/60
-
-     if (min>60):
-          #helper to convert minToHrs + % function
-          #should we worry about formatting in main vs within this function?
-          print()
-     else:
-          return min
+     #rounds to hundredths place
+     min = round(secs/60.0, 2)
+     return min
 
 #helper
 def minToHrs(mins):
-     hrs = mins/60
-     return hrs
+     return round(mins/60.0, 1)
 
 #helper
 #retrieve times from data as string, assuming MONTH/DAY/YR HR:MIN:SEC AM/PM format)
@@ -85,6 +79,12 @@ def calculateSleepDifference(rowNum):
      endTime_total += hrsToSec(endTime_hrs)
      endTime_total += minToSec(endTime_min)
      
+     totalTime = (endTime_total-startTime_total)
+
+     totalTime = secToMins(totalTime)
+
+     return minToHrs(totalTime)
+
 #holds hours of sleep per day in list,each day being a new index
 def calculateSleepDuration(sleepType):
     sleepSchedule = []
