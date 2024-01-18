@@ -27,6 +27,10 @@ def main(filename):
         avgSleep(sleepHours, totalAverages)
         avgHR(heartRates, totalAverages)
     print(totalAverages)
+<<<<<<< HEAD
+=======
+
+>>>>>>> ebab65a1551685a64ebe39b5095e0d50e109ed02
 
 #helper
 #convert sec to hrs
@@ -97,7 +101,6 @@ def calculateSleepDifference(startT, endT):
 
 #holds hours of sleep per day in list,each day being a new index
 def calculateSleepDuration(startTime, endTime):
-    sleepSchedule = []
     sleepTypeHrs = 0
     sleepTypeHrs += calculateSleepDifference(startTime, endTime)
     return sleepTypeHrs
