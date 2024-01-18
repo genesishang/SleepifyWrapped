@@ -42,8 +42,7 @@ def minToHrs(mins):
 
 #helper
 #retrieve times from data as string, assuming MONTH/DAY/YR HR:MIN:SEC AM/PM format)
-def timeRetrieve(columnName):
-     column = row[columnName]
+def timeRetrieve(column):
      splitColumn = column(' ')
      return str(splitColumn[2])
 
@@ -58,13 +57,13 @@ def minToSec(min):
      return min*60
 
 #helper for calculateSleepDuration, conversion 
-def calculateSleepDifference(startTime, endTime):
+def calculateSleepDifference(startT, endT):
      #grabbing startTime from file
-     startTime = timeRetrieve('Start Time')
+     startTime = timeRetrieve(startT)
      startTime_total = 0
 
      #grabbing endTime from file
-     endTime = timeRetrieve('End Time')
+     endTime = timeRetrieve(endT)
      endTime_total = 0
 
      #endTime_total - startTime_total ... results in sec need to convert back for user readability
