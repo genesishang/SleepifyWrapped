@@ -42,10 +42,6 @@ def main(filename):
         avgHR(heartRates, totalAverages)
 
     print(totalAverages)
-<<<<<<< HEAD
-=======
-
->>>>>>> ebab65a1551685a64ebe39b5095e0d50e109ed02
 
 
 
