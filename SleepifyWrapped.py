@@ -1,3 +1,4 @@
+import csv
 """
 Authors: Trisha Atluri, Genesis Hang, Josiame Uwumukiza
 Consulted:
@@ -9,10 +10,14 @@ def main(filename):
     with open(filename) as csvfile:
         lineReader = csv.DictReader(csvfile)
         for row in lineReader:
-             calculateSleepDuration('Light/Core')
-             calculateSleepDuration('Deep')
-             calculateSleepDuration('REM')
-             calculateSleepDuration('Awake')
+            if(row['Category'] == 'Light/Core'):
+                calculateSleepDuration(row['Start Time'], row['End Time'])
+            if(row['Category'] == 'Deep'):
+                calculateSleepDuration('Deep')
+            if(row['Category'] == 'REM'):
+                calculateSleepDuration('REM')
+            if(row['Category'] == 'Awake'):
+                calculateSleepDuration('Awake')
     csvfile.close()
     return list
 
@@ -45,7 +50,7 @@ def minToSec(min):
      return min*60
 
 #helper for calculateSleepDuration, conversion 
-def calculateSleepDifference(rowNum):
+def calculateSleepDifference(startTime, endTime):
      #grabbing startTime from file
      startTime = timeRetrieve('Start Time')
      startTime_total = 0
@@ -85,13 +90,11 @@ def calculateSleepDifference(rowNum):
      return minToHrs(totalTime)
 
 #holds hours of sleep per day in list,each day being a new index
-def calculateSleepDuration(sleepType):
+def calculateSleepDuration(startTime, endTime):
     sleepSchedule = []
     sleepTypeHrs = 0
-    if (row['Category'] == sleepType):
-            sleepTypeHrs += calculateSleepDifference(sleepType)
+    sleepTypeHrs += calculateSleepDifference(startTime, endTime)
     return sleepTypeHrs
-
 
 #output of calculateSleepDuration, used in avgSleep()
 #sleepHours = {Awake: [], Light/Core: [], Deep: [], REM: []}
