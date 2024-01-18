@@ -28,6 +28,7 @@ def main(filename):
         avgHR(heartRates, totalAverages)
     print(totalAverages)
     
+main("datasets/sleepdata_small.csv")
 
 #helper
 #convert sec to hrs
