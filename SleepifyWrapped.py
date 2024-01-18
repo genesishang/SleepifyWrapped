@@ -17,8 +17,9 @@ def main(filename):
 #helper
 #retrieve times from data as string, assuming MONTH/DAY/YR HR:MIN:SEC AM/PM format)
 def timeRetrieve(columnName):
-     splitColumn = row[columnName]
-     return str(splitColumn[1])
+     column = row[columnName]
+     splitColumn = split.splitColumn(' ')
+     return str(splitColumn[2])
 
 #helper
 #convert hrs to sec
