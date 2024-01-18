@@ -6,20 +6,28 @@ Date: 2024-01-18
 Purpose: Upskill Final Project
 """
 #main method to run all functions
+import csv
+
 def main(filename): 
     with open(filename) as csvfile:
         lineReader = csv.DictReader(csvfile)
+        sleepHours = {"Awake": [], "Light/Core": [], "Deep": [], "REM": []}
+        heartRates = {"Awake": [], "Light/Core": [], "Deep": [], "REM": []}
+        totalAverages = {"Awake": [], "Light/Core": [], "Deep": [], "REM": []}
         for row in lineReader:
             if(row['Category'] == 'Light/Core'):
-                calculateSleepDuration(row['Start Time'], row['End Time'])
+                sleepHours[Light/Core].append(calculateSleepDuration(row['Start Time'], row['End Time']))
             if(row['Category'] == 'Deep'):
-                calculateSleepDuration('Deep')
+                sleepHours[Deep].append(calculateSleepDuration('Deep'))
             if(row['Category'] == 'REM'):
-                calculateSleepDuration('REM')
+                sleepHours[REM].append(calculateSleepDuration('REM'))
             if(row['Category'] == 'Awake'):
-                calculateSleepDuration('Awake')
-    csvfile.close()
-    return list
+                sleepHours[Awake].append(calculateSleepDuration('Awake'))
+            getHR(row, heartRates)
+        avgSleep(sleepHours, totalAverages)
+        avgHR(heartRates, totalAverages)
+    print(totalAverages)
+    
 
 #helper
 #convert sec to hrs
@@ -103,16 +111,13 @@ def calculateSleepDuration(startTime, endTime):
 #output of avgSleep, this should be initialized in main
 #totalAverages = {Awake: [], Light/Core: [], Deep: [], REM: []}
 
-def getHR(linereader): #arg is created in main by opening the file and reading it into a dictReader obj
-    heartRates = {Awake: [], Light/Core: [], Deep: [], REM: []}
+def getHR(row, heartRates): #arg is created in main by opening the file and reading it into a dictReader obj
     #loop through each row in csv
-    for row in linereader:
-        heartRates[linereader["Category"]].append(linereader["Heart Rate"])
+    heartRates[row["Category"]].append(row["Heart Rate"])
     #ID sleep category
     #add the heart rate to corresponding sleep category key in heartRates dict
-    return heartRates
 
-def avgSleep(sleepHours):
+def avgSleep(sleepHours, totalAverages):
     for key in sleepHours:
         total = 0
         for value in sleepHours[key]:
@@ -120,7 +125,7 @@ def avgSleep(sleepHours):
         avg = total/len(sleepHours[key])
         totalAverages[key].append(avg)
         
-def avgHR(heartRates):
+def avgHR(heartRates, totalAverages):
     for key in heartRates:
         total = 0
         for value in heartRates[key]:
