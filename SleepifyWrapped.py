@@ -1,4 +1,4 @@
-import csv
+
 """
 Authors: Trisha Atluri, Genesis Hang, Josiame Uwumukiza
 Consulted:
