@@ -9,10 +9,30 @@ def main(filename):
     with open(filename) as csvfile:
         lineReader = csv.DictReader(csvfile)
         for row in lineReader:
-        #    list.append(row['company'])
+             list.append(row['company'])
              calculateSleepDuration('Light/Core')
+             calculateSleepDuration('Deep')
+             calculateSleepDuration('REM')
+             calculateSleepDuration('Awake')
     csvfile.close()
     return list
+
+#helper
+#convert sec to hrs
+def secToMins(secs):
+     min = secs/60
+
+     if (min>60):
+          #helper to convert minToHrs + % function
+          #should we worry about formatting in main vs within this function?
+          print()
+     else:
+          return min
+
+#helper
+def minToHrs(mins):
+     hrs = mins/60
+     return hrs
 
 #helper
 #retrieve times from data as string, assuming MONTH/DAY/YR HR:MIN:SEC AM/PM format)
@@ -24,14 +44,12 @@ def timeRetrieve(columnName):
 #helper
 #convert hrs to sec
 def hrsToSec(hrs):
-    sec = hrs*3600
-    return sec
+    return hrs*3600
 
 #helper
 #convert min to sec():
 def minToSec(min):
-     sec = min*60
-     return sec
+     return min*60
 
 #helper for calculateSleepDuration, conversion 
 def calculateSleepDifference(rowNum):
@@ -74,3 +92,7 @@ def calculateSleepDuration(sleepType):
     if (row['Category'] == sleepType):
             sleepTypeHrs += calculateSleepDifference(sleepType)
 
+
+
+
+            
