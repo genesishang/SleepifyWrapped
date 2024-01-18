@@ -91,8 +91,27 @@ def calculateSleepDuration(sleepType):
     sleepTypeHrs = 0
     if (row['Category'] == sleepType):
             sleepTypeHrs += calculateSleepDifference(sleepType)
+            sleepTypeHrs = calculateSleepDifference(sleepType)
 
+#output of calculateSleepDuration, used in avgSleep()
+sleepHours = {Awake: [], Light/Core: [], Deep: [], REM: []}
+heartRates = {Awake: [], Light/Core: [], Deep: [], REM: []}
 
+#output of avgSleep, this should be initialized in main
+totalAverages = {Awake: [], Light/Core: [], Deep: [], REM: []}
 
-
-            
+def avgSleep(sleepHours):
+    for key in sleepHours:
+        total = 0
+        for value in sleepHours[key]:
+            total+= value
+        avg = total/len(sleepHours[key])
+        totalAverages[key].append(avg)
+        
+def avgHR(heartRates):
+    for key in heartRates:
+        total = 0
+        for value in heartRates[key]:
+            total+= value
+        avg = total/len(heartRates[key])
+        totalAverages[key].append(avg)
