@@ -5,13 +5,14 @@ Date: 2024-01-18
 Purpose: Upskill Final Project
 """
 #main method to run all functions
+import csv
 
 def main(filename): 
     with open(filename) as csvfile:
         lineReader = csv.DictReader(csvfile)
-        sleepHours = {Awake: [], Light/Core: [], Deep: [], REM: []}
-        heartRates = {Awake: [], Light/Core: [], Deep: [], REM: []}
-        totalAverages = {Awake: [], Light/Core: [], Deep: [], REM: []}
+        sleepHours = {"Awake": [], "Light/Core": [], "Deep": [], "REM": []}
+        heartRates = {"Awake": [], "Light/Core": [], "Deep": [], "REM": []}
+        totalAverages = {"Awake": [], "Light/Core": [], "Deep": [], "REM": []}
         for row in lineReader:
             sleepHours[Light/Core] = calculateSleepDuration('Light/Core')
             sleepHours[Deep] = calculateSleepDuration('Deep')
@@ -20,8 +21,9 @@ def main(filename):
             getHR(row, heartRates)
         avgSleep(sleepHours, totalAverages)
         avgHR(heartRates, totalAverages)
-    csvfile.close()
+    print(totalAverages)
     
+main("datasets/sleep_data.csv")
 
 #helper
 #convert sec to hrs
