@@ -94,11 +94,20 @@ def calculateSleepDuration(sleepType):
             sleepTypeHrs = calculateSleepDifference(sleepType)
 
 #output of calculateSleepDuration, used in avgSleep()
-sleepHours = {Awake: [], Light/Core: [], Deep: [], REM: []}
-heartRates = {Awake: [], Light/Core: [], Deep: [], REM: []}
+#sleepHours = {Awake: [], Light/Core: [], Deep: [], REM: []}
+#heartRates = {Awake: [], Light/Core: [], Deep: [], REM: []}
 
 #output of avgSleep, this should be initialized in main
-totalAverages = {Awake: [], Light/Core: [], Deep: [], REM: []}
+#totalAverages = {Awake: [], Light/Core: [], Deep: [], REM: []}
+
+def getHR(linereader): #arg is created in main by opening the file and reading it into a dictReader obj
+    heartRates = {Awake: [], Light/Core: [], Deep: [], REM: []}
+    #loop through each row in csv
+    for row in linereader:
+        heartRates[linereader["Category"]].append(linereader["Heart Rate"])
+    #ID sleep category
+    #add the heart rate to corresponding sleep category key in heartRates dict
+    return heartRates
 
 def avgSleep(sleepHours):
     for key in sleepHours:
