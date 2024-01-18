@@ -16,13 +16,13 @@ def main(filename):
         totalAverages = {"Awake": [], "Light/Core": [], "Deep": [], "REM": []}
         for row in lineReader:
             if(row['Category'] == 'Light/Core'):
-                sleepHours[Light/Core].append(calculateSleepDuration(row['Start Time'], row['End Time']))
+                sleepHours["Light/Core"].append(calculateSleepDuration(row['Start Time'], row['End Time']))
             if(row['Category'] == 'Deep'):
-                sleepHours[Deep].append(calculateSleepDuration('Deep'))
+                sleepHours["Deep"].append(calculateSleepDuration(row['Start Time'], row['End Time']))
             if(row['Category'] == 'REM'):
-                sleepHours[REM].append(calculateSleepDuration('REM'))
+                sleepHours["REM"].append(calculateSleepDuration(row['Start Time'], row['End Time']))
             if(row['Category'] == 'Awake'):
-                sleepHours[Awake].append(calculateSleepDuration('Awake'))
+                sleepHours["Awake"].append(calculateSleepDuration(row['Start Time'], row['End Time']))
             getHR(row, heartRates)
         avgSleep(sleepHours, totalAverages)
         avgHR(heartRates, totalAverages)
@@ -43,7 +43,7 @@ def minToHrs(mins):
 #helper
 #retrieve times from data as string, assuming MONTH/DAY/YR HR:MIN:SEC AM/PM format)
 def timeRetrieve(column):
-     splitColumn = column(' ')
+     splitColumn = column.split(' ')
      return str(splitColumn[2])
 
 #helper
