@@ -42,7 +42,10 @@ def main(filename):
         avgHR(heartRates, totalAverages)
 
     print(totalAverages)
+<<<<<<< HEAD
+=======
 
+>>>>>>> ebab65a1551685a64ebe39b5095e0d50e109ed02
 
 
 
@@ -138,3 +141,6 @@ def avgHR(heartRates, totalAverages):
             total+= value
         avg = total/len(heartRates[key])
         totalAverages[key].append(avg)
+        
+        
+main("datasets/sleepdata_small.csv")
