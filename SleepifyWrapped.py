@@ -9,7 +9,6 @@ def main(filename):
     with open(filename) as csvfile:
         lineReader = csv.DictReader(csvfile)
         for row in lineReader:
-             list.append(row['company'])
              calculateSleepDuration('Light/Core')
              calculateSleepDuration('Deep')
              calculateSleepDuration('REM')
@@ -91,7 +90,8 @@ def calculateSleepDuration(sleepType):
     sleepTypeHrs = 0
     if (row['Category'] == sleepType):
             sleepTypeHrs += calculateSleepDifference(sleepType)
-            sleepTypeHrs = calculateSleepDifference(sleepType)
+    return sleepTypeHrs
+
 
 #output of calculateSleepDuration, used in avgSleep()
 #sleepHours = {Awake: [], Light/Core: [], Deep: [], REM: []}
