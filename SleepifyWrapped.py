@@ -1,4 +1,4 @@
-import csv
+
 """
 Authors: Trisha Atluri, Genesis Hang, Josiame Uwumukiza
 Consulted:
@@ -14,26 +14,36 @@ def main(filename):
         sleepHours = {"Awake": [], "Light/Core": [], "Deep": [], "REM": []}
         heartRates = {"Awake": [], "Light/Core": [], "Deep": [], "REM": []}
         totalAverages = {"Awake": [], "Light/Core": [], "Deep": [], "REM": []}
-        for row in lineReader:
-            if(row['Category'] == 'Light/Core'):
-                sleepHours["Light/Core"].append(calculateSleepDuration(row['Start Time'], row['End Time']))
-            if(row['Category'] == 'Deep'):
-                sleepHours["Deep"].append(calculateSleepDuration(row['Start Time'], row['End Time']))
-            if(row['Category'] == 'REM'):
-                sleepHours["REM"].append(calculateSleepDuration(row['Start Time'], row['End Time']))
-            if(row['Category'] == 'Awake'):
-                sleepHours["Awake"].append(calculateSleepDuration(row['Start Time'], row['End Time']))
-            getHR(row, heartRates)
+
+        entireFile = csvfile.readlines()
+        lenFile = len(entireFile)
+        count = 0
+        start = entireFile[1].split(',')[0]
+        time = start.split(' ')
+        day = time[0]
+        
+        #whole file
+        while (count != lenFile):
+            #per day
+            while (dateRetrieve(entireFile[count]) == day):
+                #per row
+                for row in lineReader:
+                    if(row['Category'] == 'Light/Core'):
+                        sleepHours["Light/Core"].append(calculateSleepDuration(row['Start Time'], row['End Time']))
+                    if(row['Category'] == 'Deep'):
+                        sleepHours["Deep"].append(calculateSleepDuration(row['Start Time'], row['End Time']))
+                    if(row['Category'] == 'REM'):
+                        sleepHours["REM"].append(calculateSleepDuration(row['Start Time'], row['End Time']))
+                    if(row['Category'] == 'Awake'):
+                        sleepHours["Awake"].append(calculateSleepDuration(row['Start Time'], row['End Time']))
+                    getHR(row, heartRates)
+                    count+=1
         avgSleep(sleepHours, totalAverages)
         avgHR(heartRates, totalAverages)
+
     print(totalAverages)
 
-#helper
-#convert sec to hrs
-def secToMins(secs):
-     #rounds to hundredths place
-     min = round(secs/60.0, 2)
-     return min
+
 
 #helper
 def minToHrs(mins):
@@ -43,12 +53,16 @@ def minToHrs(mins):
 #retrieve times from data as string, assuming MONTH/DAY/YR HR:MIN:SEC AM/PM format)
 def timeRetrieve(column):
      splitColumn = column.split(' ')
-     return str(splitColumn[2])
+     return str(splitColumn[1])
+
+def dateRetrieve(column):
+     splitColumn = column.split(' ')
+     return str(splitColumn[0])
 
 #helper
 #convert hrs to sec
-def hrsToSec(hrs):
-    return hrs*3600
+def hrsToMin(hrs):
+    return hrs*60
 
 #helper
 #convert min to sec():
@@ -72,27 +86,21 @@ def calculateSleepDifference(startT, endT):
      num_startTime = startTime.split(':')
      num_endTime = endTime.split(':')
 
-     #grabbing start time numbers and grouping by hrs, min, sec
+     #grabbing start time numbers and grouping by hrs, min
 
      startTime_hrs = int(num_startTime[0])
-     startTime_min = int(num_startTime[1])
-     startTime_total = int(num_startTime[2])
+     startTime_total = int(num_startTime[1]) #total in min
 
-     #grabbing end time numbers and grouping by hrs, min, sec
+     #grabbing end time numbers and grouping by hrs, min
      endTime_hrs = int(num_endTime[0])
-     endTime_min = int(num_endTime[1])
-     endTime_total = int(num_endTime[2])
+     endTime_total = int(num_endTime[1])
 
-     startTime_total += hrsToSec(startTime_hrs)
-     startTime_total += minToSec(startTime_min)
-
-     endTime_total += hrsToSec(endTime_hrs)
-     endTime_total += minToSec(endTime_min)
+     startTime_total += hrsToMin(startTime_hrs)
+     endTime_total += hrsToMin(endTime_hrs)
      
      totalTime = (endTime_total-startTime_total)
 
-     totalTime = secToMins(totalTime)
-
+     totalTime = minToHrs(totalTime)
      return minToHrs(totalTime)
 
 #holds hours of sleep per day in list,each day being a new index
