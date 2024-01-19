@@ -1,15 +1,14 @@
-
 """
-Authors: Trisha Atluri, Genesis Hang, Josiame Uwumukiza
+Authors: Trisha Atluri, Genesis Hang, Josiame Uwumukiza, Maha Khan
 Consulted:
-Date: 2024-01-18
+Date: 2024-01-19
 Purpose: Upskill Final Project
 """
 #main method to run all functions
 import csv
 
 def main(filename): 
-    with open(filename) as csvfile:
+    with open(filename, "r", encoding = "utf-8") as csvfile:
         lineReader = csv.DictReader(csvfile)
         sleepHours = {"Awake": [], "Light/Core": [], "Deep": [], "REM": []}
         heartRates = {"Awake": [], "Light/Core": [], "Deep": [], "REM": []}
@@ -44,23 +43,21 @@ def main(filename):
                     
         avgSleep(sleepHours, totalAverages)
         avgHR(heartRates, totalAverages)
-
     print(totalAverages)
-
 
 #helper
 def minToHrs(mins):
-     return round(mins/60.0, 1)
+    return round(mins/60.0, 1)
 
 #helper
 #retrieve times from data as string, assuming MONTH/DAY/YR HR:MIN:SEC AM/PM format)
 def timeRetrieve(column):
-     splitColumn = column.split(' ')
-     return str(splitColumn[1])
+    splitColumn = column.split(' ')
+    return str(splitColumn[1])
 
 def dateRetrieve(column):
-     splitColumn = column.split(' ')
-     return str(splitColumn[0])
+    splitColumn = column.split(' ')
+    return str(splitColumn[0])
 
 #helper
 #convert hrs to sec
@@ -70,41 +67,41 @@ def hrsToMin(hrs):
 #helper
 #convert min to sec():
 def minToSec(min):
-     return min*60
+    return min*60
 
 #helper for calculateSleepDuration, conversion 
 def calculateSleepDifference(startT, endT):
-     #grabbing startTime from file
-     startTime = timeRetrieve(startT)
-     startTime_total = 0
+    #grabbing startTime from file
+    startTime = timeRetrieve(startT)
+    startTime_total = 0
 
      #grabbing endTime from file
-     endTime = timeRetrieve(endT)
-     endTime_total = 0
+    endTime = timeRetrieve(endT)
+    endTime_total = 0
 
      #endTime_total - startTime_total ... results in sec need to convert back for user readability
-     totalTime = 0
+    totalTime = 0
 
      #splitting data by ':' to get ints to convert accordingly
-     num_startTime = startTime.split(':')
-     num_endTime = endTime.split(':')
+    num_startTime = startTime.split(':')
+    num_endTime = endTime.split(':')
 
      #grabbing start time numbers and grouping by hrs, min
 
-     startTime_hrs = int(num_startTime[0])
-     startTime_total = int(num_startTime[1]) #total in min
+    startTime_hrs = int(num_startTime[0])
+    startTime_total = int(num_startTime[1]) #total in min
 
      #grabbing end time numbers and grouping by hrs, min
-     endTime_hrs = int(num_endTime[0])
-     endTime_total = int(num_endTime[1])
+    endTime_hrs = int(num_endTime[0])
+    endTime_total = int(num_endTime[1])
 
-     startTime_total += hrsToMin(startTime_hrs)
-     endTime_total += hrsToMin(endTime_hrs)
+    startTime_total += hrsToMin(startTime_hrs)
+    endTime_total += hrsToMin(endTime_hrs)
      
-     totalTime = (endTime_total-startTime_total)
+    totalTime = (endTime_total-startTime_total)
 
-     totalTime = minToHrs(totalTime)
-     return minToHrs(totalTime)
+    totalTime = minToHrs(totalTime)
+    return minToHrs(totalTime)
 
 #holds hours of sleep per day in list,each day being a new index
 def calculateSleepDuration(startTime, endTime):
