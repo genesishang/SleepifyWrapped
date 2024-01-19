@@ -18,6 +18,9 @@ As college students with no medical background, we want to make it abundantly cl
 
 ## Future Directions
 As a group, we had 12 hours to code this project. With the time constraint, we 
+- scientifically-backed recommendations to improve quality of sleep
+- fully developed front-end infrastructure so lay users can interact with the program
+- suggesting risks for sleep disorders such as sleep apnea (would require more research)
 
 
 
