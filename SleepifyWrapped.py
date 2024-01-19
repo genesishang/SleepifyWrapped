@@ -27,10 +27,6 @@ def main(filename):
         avgSleep(sleepHours, totalAverages)
         avgHR(heartRates, totalAverages)
     print(totalAverages)
-<<<<<<< HEAD
-=======
-
->>>>>>> ebab65a1551685a64ebe39b5095e0d50e109ed02
 
 #helper
 #convert sec to hrs
@@ -133,6 +129,3 @@ def avgHR(heartRates, totalAverages):
             total+= value
         avg = total/len(heartRates[key])
         totalAverages[key].append(avg)
-        
-        
-main("datasets/sleepdata_small.csv")
