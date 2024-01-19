@@ -17,16 +17,18 @@ def main(filename):
 
         entireFile = csvfile.readlines()
         lenFile = len(entireFile)
-        count = 0
+        count = 1
         start = entireFile[1].split(',')[0]
         time = start.split(' ')
         day = time[0]
+
         
         #whole file
         while (count != lenFile):
             #per day
             while (dateRetrieve(entireFile[count]) == day):
                 #per row
+                print((entireFile[count]))
                 for row in lineReader:
                     if(row['Category'] == 'Light/Core'):
                         sleepHours["Light/Core"].append(calculateSleepDuration(row['Start Time'], row['End Time']))
@@ -38,11 +40,12 @@ def main(filename):
                         sleepHours["Awake"].append(calculateSleepDuration(row['Start Time'], row['End Time']))
                     getHR(row, heartRates)
                     count+=1
+                    print(dateRetrieve(entireFile[count]))
+                    
         avgSleep(sleepHours, totalAverages)
         avgHR(heartRates, totalAverages)
 
     print(totalAverages)
-
 
 
 #helper
@@ -137,6 +140,4 @@ def avgHR(heartRates, totalAverages):
             total+= value
         avg = total/len(heartRates[key])
         totalAverages[key].append(avg)
-        
-        
-main("datasets/sleepdata_small.csv")
+
